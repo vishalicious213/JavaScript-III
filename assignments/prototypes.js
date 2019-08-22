@@ -16,12 +16,24 @@
   * destroy() // prototype method that returns: `${this.name} was removed from the game.`
 */
 
+function GameObject(attribute) {
+  this.createdAt = attribute.createdAt;
+  this.name = attribute.name;
+  this.dimensions = attribute.dimensions;
+}
+GameObject.prototype.destroy = function() {`$(this.name) was removed from the game.`};
+
 /*
   === CharacterStats ===
   * healthPoints
   * takeDamage() // prototype method -> returns the string '<object name> took damage.'
   * should inherit destroy() from GameObject's prototype
 */
+
+function CharacterStats(attribute) {
+  this.healthPoints = attribute.healthPoints;
+}
+CharacterStats.prototype.takeDamage = function() {return `$(this.name) took damage.`};
 
 /*
   === Humanoid (Having an appearance or character resembling that of a human.) ===
@@ -33,6 +45,31 @@
   * should inherit takeDamage() from CharacterStats
 */
  
+function Humanoid(attribute) {
+  this.team = attribute.team;
+  this.weapons = attribute.weapons;
+  this.language = attribute.language;
+}
+Humanoid.prototype.greet = function() {return `$(this.name) offers a greeting in $(this.language).`};
+
+const vish = new Humanoid({
+  createdAt: new Date(),      //GameObject
+  dimensions: {               //GameObject
+    length: 2,                //GameObject
+    width: 2,                 //GameObject
+    height: 1,                //GameObject
+  },
+  healthPoints: 5,            //CharacterStats
+  name: 'Bruce',              //GameObject
+  team: 'Mage Guild',         //Humanoid
+  weapons: [                  //Humanoid
+    'Staff of Shamalama',
+  ],
+  language: 'Common Tongue',  //Humanoid
+});
+
+
+
 /*
   * Inheritance chain: GameObject -> CharacterStats -> Humanoid
   * Instances of Humanoid should have all of the same properties as CharacterStats and GameObject.
