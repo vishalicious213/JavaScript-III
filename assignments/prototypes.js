@@ -21,7 +21,7 @@ function GameObject(attribute) {
   this.name = attribute.name;
   this.dimensions = attribute.dimensions;
 }
-GameObject.prototype.destroy = function() {`$(this.name) was removed from the game.`};
+GameObject.prototype.destroy = function() {return `$(this.name) was removed from the game.`};
 
 /*
   === CharacterStats ===
@@ -31,6 +31,7 @@ GameObject.prototype.destroy = function() {`$(this.name) was removed from the ga
 */
 
 function CharacterStats(attribute) {
+  GameObject.call(this, attribute); // inherit from GameObject
   this.healthPoints = attribute.healthPoints;
 }
 CharacterStats.prototype.takeDamage = function() {return `$(this.name) took damage.`};
@@ -46,27 +47,12 @@ CharacterStats.prototype.takeDamage = function() {return `$(this.name) took dama
 */
  
 function Humanoid(attribute) {
+  CharacterStats.call(this, attribute); // inherit from CharacterStats
   this.team = attribute.team;
   this.weapons = attribute.weapons;
   this.language = attribute.language;
 }
 Humanoid.prototype.greet = function() {return `$(this.name) offers a greeting in $(this.language).`};
-
-const vish = new Humanoid({
-  createdAt: new Date(),      //GameObject
-  dimensions: {               //GameObject
-    length: 2,                //GameObject
-    width: 2,                 //GameObject
-    height: 1,                //GameObject
-  },
-  healthPoints: 5,            //CharacterStats
-  name: 'Bruce',              //GameObject
-  team: 'Mage Guild',         //Humanoid
-  weapons: [                  //Humanoid
-    'Staff of Shamalama',
-  ],
-  language: 'Common Tongue',  //Humanoid
-});
 
 
 
@@ -78,11 +64,15 @@ const vish = new Humanoid({
 
 // Test you work by un-commenting these 3 objects and the list of console logs below:
 
-/*
-  const mage = new Humanoid({
-    createdAt: new Date(),
-    dimensions: {
-      length: 2,
+
+
+
+
+
+const mage = new Humanoid({
+  createdAt: new Date(),
+  dimensions: {
+    length: 2,
       width: 1,
       height: 1,
     },
@@ -129,6 +119,22 @@ const vish = new Humanoid({
     language: 'Elvish',
   });
 
+  const vish = new Humanoid({
+    createdAt: new Date(),      //GameObject
+    dimensions: {               //GameObject
+      length: 2,                //GameObject
+      width: 2,                 //GameObject
+      height: 1,                //GameObject
+    },
+    healthPoints: 5,            //CharacterStats
+    name: 'Vish',               //GameObject
+    team: 'Lambda School',      //Humanoid
+    weapons: [                  //Humanoid
+      'Schecter Stiletto Studio 5L',
+    ],
+    language: 'Common Tongue',  //Humanoid
+  });
+
   console.log(mage.createdAt); // Today's date
   console.log(archer.dimensions); // { length: 1, width: 2, height: 4 }
   console.log(swordsman.healthPoints); // 15
@@ -137,9 +143,9 @@ const vish = new Humanoid({
   console.log(mage.weapons); // Staff of Shamalama
   console.log(archer.language); // Elvish
   console.log(archer.greet()); // Lilith offers a greeting in Elvish.
-  console.log(mage.takeDamage()); // Bruce took damage.
-  console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
-*/
+  // console.log(mage.takeDamage()); // Bruce took damage.
+  // console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
+
 
   // Stretch task: 
   // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.  
