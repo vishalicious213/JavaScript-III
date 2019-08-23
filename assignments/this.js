@@ -20,11 +20,13 @@
 
 // code example for Window Binding
 
-function windowBinding() {
-    console.log(this);
-  }
-  windowBinding();
+function windowBinding() {          // function is on global scope, so window is
+    console.log(this);              // global. Inspect/console shows entire JS
+  }                                 // language. Strict mode would show error.
+  
+  windowBinding();                  // invoking global function
 
+//-----------------------------------------------
 
 // Principle 2
 
@@ -39,10 +41,27 @@ var me = {                          // object
 
 me.sayName();                       // invoking function inside of "me" object
 
+//-----------------------------------------------
+
 // Principle 3
 
 // code example for New Binding
 
+
+
+//-----------------------------------------------
+
 // Principle 4
 
 // code example for Explicit Binding
+
+var sayBind = function() {          // global function
+    console.log(this.name);
+}
+
+var bindType = {                    // object
+    name: "Explicit Binding",       // attribute
+};
+
+sayBind.call(bindType);             // invoke global function with explicit binding to
+                                    // bindType
