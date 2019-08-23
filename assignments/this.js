@@ -20,9 +20,24 @@
 
 // code example for Window Binding
 
+function windowBinding() {
+    console.log(this);
+  }
+  windowBinding();
+
+
 // Principle 2
 
 // code example for Implicit Binding
+
+var me = {                          // object
+    name: "Vish",                   // attribute
+    sayName: function(){            // function inside of object
+        console.log(this.name);     // this = "me", so name = name inside of "me" = Vish
+    }                               // w/o "this" console line is blank - no context
+}
+
+me.sayName();                       // invoking function inside of "me" object
 
 // Principle 3
 
