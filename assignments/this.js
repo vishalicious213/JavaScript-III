@@ -32,7 +32,7 @@ function windowBinding() {          // function is on global scope, so window is
 
 // code example for Implicit Binding
 
-var me = {                          // object
+let me = {                          // object
     name: "Vish",                   // attribute
     sayName: function(){            // function inside of object
         console.log(this.name);     // this = "me", so name = name inside of "me" = Vish
@@ -47,7 +47,11 @@ me.sayName();                       // invoking function inside of "me" object
 
 // code example for New Binding
 
+let Robot = function(attributes) {  // constructor function, so we can create an object
+    this.name = attributes.name;    // with the "new" command and then have it bind
+}                                   // automatically to "this"
 
+let bot = new Robot("Optimus");     // create a "new" Robot that binds to "this"
 
 //-----------------------------------------------
 
